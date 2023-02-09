@@ -11,6 +11,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/gopheramit/greenlightAPI/internal/data"
 	_ "github.com/lib/pq"
 )
 
@@ -30,6 +31,7 @@ type config struct {
 type application struct {
 	config config
 	logger *log.Logger
+	models data.Models
 }
 
 func main() {
@@ -47,9 +49,11 @@ func main() {
 		logger.Fatal(err)
 	}
 	defer db.Close()
+	logger.Printf("database connection pool established")
 	app := &application{
 		config: cfg,
 		logger: logger,
+		models: data.NewModels(db),
 	}
 	// mux := http.NewServeMux()
 	// mux.HandleFunc("/v1/healthcheck", app.healthCheckHandler)

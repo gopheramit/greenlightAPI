@@ -1,0 +1,6 @@
+migrate create -ext sql -dir ./migrations -seq create_movies_table
+
+ grant all on database greenlight to greenlight;
+  alter database greenlight owner to greenlight;
+
+migrate -database "postgres://greenlight:pa55word@localhost/greenlight?sslmode=disable"  -path ./migrations up
