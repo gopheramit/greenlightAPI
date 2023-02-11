@@ -1,4 +1,5 @@
 migrate create -ext sql -dir ./migrations -seq create_movies_table
+migrate create -ext sql -dir ./migrations -seq add_movies_indexes
 
  grant all on database greenlight to greenlight;
   alter database greenlight owner to greenlight;
